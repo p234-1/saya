@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2024 AI产品经理大会</title>
+
+    <!-- 引入外部的CSS文件 -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- 引入外部JavaScript文件，并延迟加载 -->
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <!-- 导航栏 -->
+    <nav class="nav">
+        <a href="#home" onclick="navigateTo('#home')">首页</a>
+        <a href="#ai_tools" onclick="navigateTo('#ai_tools')">AI工具集</a>
+        <a href="index.html" onclick="navigateTo('#ai_news')">AI资讯</a>
+        <a href="huodong.html" onclick="navigateTo('#ai_events')">AI活动</a>
+        <a href="sheqv.html" onclick="navigateTo('#ai_community')">AI社区</a>
+        <a href="javascript:void(0)" class="login-register-btn">登录/注册</a> <!-- 点击此处弹出登录/注册弹窗 -->
+    </nav>
+
+    <!-- 登录/注册 弹窗 -->
+    <div id="login-register-modal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeLoginRegister()">&times;</span>
+            <h2>请选择操作</h2>
+            <button onclick="showLoginForm()">登录</button>
+            <button onclick="showRegisterForm()">注册</button>
+
+            <!-- 登录表单 -->
+            <div id="login-form" style="display: none;">
+                <h3>请输入用户名和密码登录</h3>
+                <div class="input-group">
+                    <label for="login-username">用户名：</label>
+                    <input type="text" id="login-username" placeholder="请输入用户名">
+                </div>
+                <div class="input-group">
+                    <label for="login-password">密码：</label>
+                    <input type="password" id="login-password" placeholder="请输入密码">
+                </div>
+                <button onclick="login()">登录</button>
+                <!-- 取消按钮 -->
+                <button class="cancel-btn">取消</button>
+            </div>
+
+            <!-- 注册表单 -->
+            <div id="register-form" style="display: none;">
+                <h3>请输入注册信息</h3>
+                <div class="input-group">
+                    <label for="register-username">用户名：</label>
+                    <input type="text" id="register-username" placeholder="请输入用户名">
+                </div>
+                <div class="input-group">
+                    <label for="register-password">密码：</label>
+                    <input type="password" id="register-password" placeholder="请输入密码">
+                </div>
+                <div class="input-group">
+                    <label for="confirm-password">确认密码：</label>
+                    <input type="password" id="confirm-password" placeholder="请确认密码">
+                </div>
+                <button onclick="register()">注册</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main">
+        <!-- 左侧文章导航栏 -->
+        <aside class="article-nav">
+            <h3>文章目录</h3>
+            <ul>
+                <li><a href="#section1" onclick="navigateTo('#section1')">2024 AI产品经理大会正式官宣</a></li>
+                <li><a href="#section2" onclick="navigateTo('#section2')">主会场嘉宾</a></li>
+                <li><a href="#section3" onclick="navigateTo('#section3')">主会场议程安排</a></li>
+                <li><a href="#section4" onclick="navigateTo('#section4')">分论坛的闭门研讨会安排</a></li>
+            </ul>
+        </aside>
+
+        <!-- 主要内容 -->
+        <section class="content">
+            <article id="section1" class="article">
+                <img src="https://image.yunyingpai.com/wp/2024/11/quXFM245wQo1UnzvdFjY.jpg" alt="2024 AI产品经理大会">
+                <h2>2024 AI产品经理大会正式官宣</h2>
+                <p>邀你一同探索AI时代的发展机会！</p>
+                <p>会议时间：2024-12-07 09:30至2024-12-08 18:00结束</p>
+                <p>会议地点：深圳市南山区科兴科学园B4单元科兴国际会议中心3楼</p>
+                <p>会议规模：500</p>
+                <img src="https://image.yunyingpai.com/wp/2024/11/h8Y3E4uvCv0itV7ZUoub.png" alt="huiyi">
+                <p>主办单位：人人都是产品经理、腾讯大讲堂、起点课堂</p>
+                <p>在这个AI技术不断推动变革的时代，作为站在时代潮头的互联网从业者，这场关于未来发展的大会不容错过。</p>
+            </article>
+
+            <article id="section2" class="article">
+                <h2>主会场嘉宾</h2>
+                <p>2天白天的主会场，邀请了来自腾讯、华为云、商汤等大厂的专家，聚焦在AI时代的趋势与机会洞察、AI赋能业务</p>
+            </article>
+
+            <article id="section3" class="article">
+                <h2>主会场议程安排</h2>
+                <img src="https://image.yunyingpai.com/wp/2024/11/b4uwLnepa5HxiIlZLMZK.png" alt="">
+                <p>2天白天的大会议程已经基本确定，具体的分享主题内容还在最终沟通调整中！</p>
+            </article>
+
+            <article id="section4" class="article">
+                <h2>分论坛的闭门研讨会安排</h2>
+                <img src="https://image.yunyingpai.com/wp/2024/11/4LlYThGBzAGXPuXdFNXd.jpg" alt="">
+                <p>本次大会除了白天的主题分享以外，为了让大家能够有一些更深度的交流，12月7日晚，我们特别联合了RWS、个推，策划了2场闭门研讨会</p>
+            </article>
+        </section>
+
+        <!-- 侧边栏：最新资讯 -->
+        <aside class="sidebar">
+            <section id="latest-news">
+                <h2>最新咨询</h2>
+                <button class="refresh-btn" onclick="fetchLatestNews()">刷新资讯</button>
+            </section>
+        </aside>
+    </div>
+
+    <!-- 返回顶部按钮 -->
+    <button class="back-to-top" onclick="scrollToTop()" style="display: none;">Top</button>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <p>版权所有 &copy; AI TOP100</p>
+    </footer>
+</body>
+
+</html>

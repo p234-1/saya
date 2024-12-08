@@ -1,0 +1,714 @@
+/* 通用变量 */
+:root {
+    --primary-color: #fd9f1a;
+    --hover-color: #f99e30;
+    --active-color: #e88c1a;
+    --background-color: #f4f5f7;
+    --text-color: #333;
+    --link-hover-color: #fd9f1a;
+    --footer-bg-color: #333;
+    --nav-bg-color: #333;
+    --white: #ffffff;
+    --gray: #888;
+}
+
+/* 通用样式 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    overflow-x: hidden;
+}
+
+/* 设置导航栏背景色和基本样式 */
+.nav {
+    background-color: var(--nav-bg-color);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+/* 设置导航栏项的样式 */
+.nav a {
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 40px;
+    text-decoration: none;
+    font-size: 12px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.nav a.active {
+    background-color: #ddd; /* 和悬停效果一样 */
+    color: black;
+    font-weight: bold; /* 可以加粗 */
+}
+
+/* 为链接添加 hover 效果 */
+.nav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+/* 登录/注册按钮的样式 */
+.login-register-btn {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 14px 30px;
+    border-radius: 50px;
+    font-size: 16px;
+    text-decoration: none;
+    display: inline-block;
+    margin-left: 10px;
+    transition: background-color 0.3s;
+}
+
+/* 登录/注册按钮 hover 时的样式 */
+.login-register-btn:hover {
+    background-color: var(--hover-color);
+}
+
+/* 主内容区 */
+.main {
+    display: flex;
+    padding: 20px;
+    max-width: 1500px;
+    margin: 70px auto;
+    overflow: hidden;
+    flex-wrap: wrap;
+}
+
+/* 左侧文章导航栏 */
+.article-nav {
+    width: auto;
+    padding: 20px;
+    background-color: var(--white);
+    border-radius: 10px;
+    height: 100%;
+}
+
+.article-nav h3 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid var(--background-color);
+}
+
+.article-nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.article-nav ul li {
+    margin-bottom: 10px;
+}
+
+.article-nav ul li a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+.article-nav ul li a:hover {
+    color: var(--link-hover-color);
+}
+
+/* 给文章目录中的当前章节链接添加高亮样式 */
+.article-nav a.active {
+    color: var(--white);
+    background-color: #007BFF;
+    font-weight: bold;
+}
+
+/* 主要内容区 */
+.content {
+    padding: 20px;
+    flex: 3;
+    background-color: var(--white);
+    margin: 0 20px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    max-width: 800px;
+    font-size: 16px;
+}
+
+/* 侧边栏 */
+.sidebar {
+    flex: 1;
+    padding: 20px;
+    background-color: var(--white);
+    border-radius: 10px;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+#latest-news {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+#latest-news h2 {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid var(--background-color);
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/* 新闻项样式 */
+.news-item {
+    margin-bottom: 20px;
+}
+
+.news-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--text-color);
+    margin-bottom: 5px;
+}
+
+.news-time {
+    font-size: 14px;
+    color: var(--gray);
+}
+
+/* 按钮样式 */
+.refresh-btn {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+.refresh-btn:hover {
+    background-color: var(--hover-color);
+}
+
+.refresh-btn:active {
+    background-color: var(--active-color);
+}
+
+/* 文章样式 */
+.article {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.article img {
+    max-width: 70%;
+    height: auto;
+}
+
+/* 返回顶部按钮样式 */
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 10px;
+    border-radius: 50px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    display: none;
+    z-index: 1000;
+    transition: background-color 0.3s;
+    width: 40px;
+    height: 40px;
+}
+
+.back-to-top:hover {
+    background-color: var(--hover-color);
+}
+
+.back-to-top:active {
+    background-color: var(--active-color);
+}
+
+/* 页脚样式 */
+.footer {
+    background-color: var(--footer-bg-color);
+    color: var(--white);
+    text-align: center;
+    padding: 10px;
+    clear: both;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+/* 媒体查询: 响应式设计 */
+@media (max-width: 768px) {
+    .main {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        flex: none;
+        width: 100%;
+        margin: 0 0 20px 0;
+    }
+
+    .content {
+        flex: none;
+        width: 100%;
+    }
+
+    .nav a {
+        font-size: 10px;
+    }
+
+    .footer {
+        font-size: 14px;
+    }
+}
+
+/* 弹窗样式 */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 280px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+/* 关闭按钮 */
+.modal .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    color: #333;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* 输入框组样式 */
+.input-group {
+    margin: 15px 0;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #333;
+}
+
+.input-group input {
+    width: 250px;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.input-group input:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+/* 按钮样式 */
+button {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    width: 20%;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* 取消按钮样式 */
+.cancel-btn {
+    padding: 10px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    width: 20%;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.cancel-btn:hover {
+    background-color: #e53935;
+}
+
+/* 登录/注册按钮切换 */
+#login-form, #register-form {
+    display: none;
+}
+
+#login-form.active, #register-form.active {
+    display: block;
+}
+
+/* 活动加 */
+/* 图片滚动 */
+.carousel {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    max-width: 100%;
+    margin-top: 50px;
+  }
+  .carousel-container {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+  .carousel img {
+    width: 100%;
+    flex-shrink: 0;
+  }
+
+  /* 精彩活动 */
+  .lll {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    width: 80%;
+    margin: 20px auto; 
+  }
+
+  .op {
+    width: 85%;
+    display: flex; 
+    flex-direction: row; 
+    flex-wrap: wrap;
+    justify-content: space-between; 
+    margin: 20px auto; 
+  }
+  
+  .op > div {
+    flex: 1 1 calc(33.333% - 20px); 
+    margin: 10px; 
+    background-color: #ffffff; 
+    border-radius: 20px; 
+    overflow: hidden; 
+    position: relative; 
+    min-height: 400px;
+  }
+  
+  /* 活动图片 */
+  .op img {
+    width: 100%; 
+    height: 60%; 
+    border-radius: 20px; 
+    transition: transform 0.3s ease; 
+  }
+  .op img:hover {
+    transform: scale(1.1); 
+  }
+
+  .op p {
+    font-size: 14px; 
+    color: #dba489; 
+  }
+
+  .op ul {
+    list-style-type: none; 
+    padding: 0; 
+    display: flex; 
+    flex-direction: row; 
+    flex-wrap: wrap;
+  }
+
+  /* 已结束 */
+  .ff {
+    position: absolute; 
+    right: 0; 
+    width: 80px; 
+    height: 45px; 
+    z-index: 10; 
+    padding: 0;
+  }
+  .ff li {
+    background-color: #f0f0f0;
+    border-radius: 20px; 
+    padding: 5px 10px; 
+    margin: 5px;
+  }
+
+  /* 进行中 */
+  .kk{
+    position: absolute; 
+    bottom: 160px;
+    right: 0; 
+    width: 80px; 
+    height: 45px; 
+    z-index: 10; 
+    padding: 0;
+  }
+  .kk li {
+    background-color: #f5b400;
+    border-radius: 20px; 
+    padding: 5px 10px; 
+    margin: 5px; 
+  }
+
+
+  /* 活动标签 */
+  .xx  li {
+    background-color: #f0f0f0; 
+    border-radius: 20px; 
+    padding: 5px 10px;  
+    margin: 5px; 
+    text-align: center; 
+  }
+
+  
+  /* 查看更多 */
+  .gg {
+    width: 120px;
+    margin: 20px auto;
+    border-radius: 30px;
+    align-items: center;
+    border-radius: 20px;
+    background-color: #e9a477;
+    font-size: 30px; 
+    color: #eef535; 
+    padding: 5px 10px; 
+  }
+  
+  .gg:hover {
+    background-color: rgb(207, 74, 74);
+  }
+
+
+
+  /* 社区加 */
+  .wms {
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: space-between; 
+    align-items: stretch; 
+    margin-top: 75px; 
+    justify-content: space-between;
+  }
+  
+  .wms>div{
+    margin: 10px;
+  }
+
+
+  /* 三个最 */
+  .qq {
+    flex: 0.13; 
+    height: auto;
+    margin: 10px; 
+    padding: 5px;
+    margin-left: 50px;
+  }
+
+  .qqone{
+    background-color: #f9f9f9f9;
+    margin: 10px;
+    padding: 5px; 
+    border-radius: 8px; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+  }
+  .qqone ul {
+    list-style-type: none; 
+    padding: 0; 
+    margin: 0; 
+  }
+  
+  .qqone li {
+    padding: 10px 0; 
+    color: #333; 
+    font-size: 16px; 
+    border-bottom: 1px solid #e0e0e0e0; 
+    text-align: center; 
+  }
+  
+  .qqone li:last-child {
+    border-bottom: none; 
+  }
+  
+  .qqone li:hover {
+    background-color: #e0e0e0e0; 
+  }
+  
+  /* 推荐圈子 */
+  .qqtwo{
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+    margin: 10px;
+    padding: 5px;
+    border-radius: 8px; 
+  }
+  .qqtwo >div{
+    display: flex;
+    margin-top: 25px; 
+  }
+  .qqtwo>div img {
+    border-radius: 10%; 
+    width: 25px; 
+    height: 25px; 
+  }
+  .qqtwo>div p{
+    margin: 5px;
+  }
+
+  /* 中间区域 */
+  .pp{
+    flex: 0.7;
+    padding: 5px;
+    border-radius: 8px;
+  }
+
+
+  /* 发布框 */
+  .flfl {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .slsl {
+    width: 50%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .xlxl{
+    width: 80%;
+    height: 100px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: none;
+  }
+  
+  .blbl {
+    width: 50pxpx;
+    padding: 10px; 
+    background-color: #ffcc00; 
+    border: none; 
+    border-radius: 8px;
+    cursor: pointer; 
+    transition: background-color 0.3s; 
+  }
+  
+  .blbl:hover {
+    background-color: #e6b800;
+  }
+
+
+  /* 评论区 */
+  .pptwo{
+    background-color: #ece1e1f9;
+    border-radius: 8px;
+  }
+
+  .ppthree{
+    display: flex; 
+    margin-top: 15px;
+    padding: 10px;
+  }
+
+
+  .ppthree img.ttou{
+    border-radius: 50%; 
+    width: 50px; 
+    height: 50px; 
+  }
+
+  .ppthree img.ddji {
+    height: 15px;
+    width: auto;
+    margin-top: 7px;
+  }
+
+  .ppthree p {
+    margin: 5px; 
+    size: 20px;
+  }
+
+  .ppfour{
+    margin-left: 50px;
+    margin-right: 20px;
+  }
+
+  .ppfour img{
+    border-radius: 5%;
+  }
+
+
+  /* 上周最受欢迎 */
+  .rr{
+    flex: 0.17;
+    padding: 5px; 
+    border-radius: 8px; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+    height: 350px;
+  }
+
+  .rr >div{
+    display: flex;
+    margin-top: 20px; 
+  }
+  
+  .rr>div img {
+    margin: 0 5px; 
+  }
+
+  .rr>div img.yiyiyi {
+    border-radius: 50%; 
+    width: 40px; 
+    height: 40px; 
+  }
+  
+  .rr>div img.ererer {
+    height: 15px;
+    width: auto;
+  }
+
+  
+  .rr>div h5 {
+    margin: 0; 
+  }

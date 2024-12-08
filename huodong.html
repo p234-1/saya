@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI活动</title>
+<link rel="stylesheet" href="styles.css">
+<script src="huodong.js" defer></script>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="#home" onclick="navigateTo('#home')">首页</a>
+    <a href="#ai_tools" onclick="navigateTo('#ai_tools')">AI工具集</a>
+    <a href="index.html" onclick="navigateTo('#ai_news')">AI资讯</a>
+    <a href="huodong.html" onclick="navigateTo('#ai_events')">AI活动</a>
+    <a href="sheqv.html" onclick="navigateTo('#ai_community')">AI社区</a>
+    <a href="javascript:void(0)" class="login-register-btn">登录/注册</a> <!-- 点击此处弹出登录/注册弹窗 -->
+  </nav>
+
+  <!-- 登录/注册 弹窗 -->
+  <div id="login-register-modal" class="modal" style="display:none;">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeLoginRegister()">&times;</span>
+        <h2>请选择操作</h2>
+        <button onclick="showLoginForm()">登录</button>
+        <button onclick="showRegisterForm()">注册</button>
+
+        <!-- 登录表单 -->
+        <div id="login-form" style="display: none;">
+            <h3>请输入用户名和密码登录</h3>
+            <div class="input-group">
+                <label for="login-username">用户名：</label>
+                <input type="text" id="login-username" placeholder="请输入用户名">
+            </div>
+            <div class="input-group">
+                <label for="login-password">密码：</label>
+                <input type="password" id="login-password" placeholder="请输入密码">
+            </div>
+            <button onclick="login()">登录</button>
+            <!-- 取消按钮 -->
+            <button class="cancel-btn">取消</button>
+        </div>
+
+        <!-- 注册表单 -->
+        <div id="register-form" style="display: none;">
+            <h3>请输入注册信息</h3>
+            <div class="input-group">
+                <label for="register-username">用户名：</label>
+                <input type="text" id="register-username" placeholder="请输入用户名">
+            </div>
+            <div class="input-group">
+                <label for="register-password">密码：</label>
+                <input type="password" id="register-password" placeholder="请输入密码">
+            </div>
+            <div class="input-group">
+                <label for="confirm-password">确认密码：</label>
+                <input type="password" id="confirm-password" placeholder="请确认密码">
+            </div>
+            <button onclick="register()">注册</button>
+        </div>
+    </div>
+  </div>
+
+  <div class="carousel">
+    <div class="carousel-container">
+      <img src="https://aitop100app-1251510006.cos.ap-shanghai.myqcloud.com/article/undefined/aebedec4-b259-4eda-9e02-9741da3bacde.png?imageMogr2/format/webp/" alt="Image 1" class="active">
+      <img src="https://aitop100app-1251510006.cos.ap-shanghai.myqcloud.com/article/undefined/cbad7273-fcc8-4463-a57e-6c9963d2ae27.png?imageMogr2/format/webp/" alt="Image 2">
+    </div>
+  </div>
+
+  <div class="lll">
+    <img src="data:image/png;base64,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">
+    <img src="https://www.aitop100.cn/assets/activity_img_cooperate-fbdf62a2.png">   
+  </div>
+
+  <div class="op">
+    <div class="op1">
+      <img src="https://aitop100app-1251510006.cos.ap-shanghai.myqcloud.com/article/undefined/7f4cc2ed-6b9f-49d6-be21-fbf3179a8af2.png?imageMogr2/format/webp/thumbnail/560x/rquality/80">
+      <h4>魔多二次元模型创作大赛「空境之约」</h4>
+      <p>2024/11/20 00:00~12/02 23:59</p>
+      <ul class="ff">
+        <li>已结束</li>
+      </ul>
+      <ul class="xx">
+        <li>AI大模型</li>
+        <li>A现金奖</li>
+      </ul>
+    </div>
+
+    <div class="op2">
+      <img src="https://aitop100app-1251510006.cos.ap-shanghai.myqcloud.com/article/undefined/4bac4507-25a1-4b9e-895b-1574bdd292c3.png?imageMogr2/format/webp/thumbnail/560x/rquality/80">
+      <h4>第二届地外生命博物馆AI设计大赛</h4>
+      <p>2024/11/20 00:00~12/02 23:59</p>
+      <ul class="ff">
+        <li>已结束</li>
+      </ul>
+      <ul class="xx">
+        <li>AI绘画</li>
+        <li>AI创作大赛</li>
+      </ul>
+    </div>
+    
+    <div class="op3">
+      <img src="https://aitop100app-1251510006.cos.ap-shanghai.myqcloud.com/article/undefined/f72c23cf-11b0-4015-a066-f152333167ac.png?imageMogr2/format/webp/thumbnail/560x/rquality/80">
+      <h4>animonda爱诺德·非凡子品牌IP形象创意大赛</h4>
+      <p>2024/10/20 00:00~11/30 23:59</p>
+      <ul class="ff">
+        <li>已结束</li>
+      </ul>
+      <ul class="xx">
+        <li>AI创作大赛</li>
+        <li>AI绘画</li>
+      </ul>
+    </div>
+
+    <div>
+      <img src="https://aitop100app-1251510006.cos.ap-shanghai.myqcloud.com/article/undefined/7adfd877-d64d-4e43-86bc-523f46985ccf.png?imageMogr2/format/webp/thumbnail/560x/rquality/80">
+      <h4>真AI牛奶真AI创意AIGC视频生态创新大赛</h4>
+      <p>2024/11/27 00:00~2025/01/13 23:59</p>
+      <ul class="kk">
+        <li>进行中</li>
+      </ul>
+      <ul class="xx">
+        <li>AI视频创作</li>
+        <li>AI创作大赛</li>
+      </ul>
+    </div>
+
+    <div>
+      <img src="https://aitop100app-1251510006.cos.ap-shanghai.myqcloud.com/article/undefined/e681f920-e841-4d72-a493-7182f3298796.png?imageMogr2/format/webp/thumbnail/560x/rquality/80">
+      <h4>WHEE美图IP形象定制大赛</h4>
+      <p>2024/12/06 00:00~12/31 23:59</p>
+      <ul class="kk">
+        <li>进行中</li>
+      </ul>
+      <ul class="xx">
+        <li>AI绘画</li>
+        <li>AI创作大赛</li>
+      </ul>
+    </div>
+
+    <div>
+      <img src="https://aitop100app-1251510006.cos.ap-shanghai.myqcloud.com/article/undefined/8854b359-82fa-4b9b-89a3-f52a1843b87b.png?imageMogr2/format/webp/thumbnail/560x/rquality/80">
+      <h4>广联达CONCETTO AI创意设计大赛</h4>
+      <p>2024/12/06 00:00~12/10 23:59</p>
+      <ul class="kk">
+        <li>进行中</li>
+      </ul>
+      <ul class="xx">
+        <li>AI绘画</li>
+        <li>AI创作大赛</li>
+      </ul>
+    </div>
+
+    <div>
+      <img src="https://aitop100app-1251510006.cos.ap-shanghai.myqcloud.com/article/undefined/effc59d7-417e-4b07-8d55-d2d142cd228b.png?imageMogr2/format/webp/thumbnail/560x/rquality/80">
+      <h4>山西省政务AI智能助理创意设计大赛</h4>
+      <p>2024/11/20 00:00~12/15 23:59</p>
+      <ul class="kk">
+        <li>进行中</li>
+      </ul>
+      <ul class="xx">
+        <li>AI绘画</li>
+        <li>AI创作大赛</li>
+      </ul>
+    </div>
+
+    <div>
+      <img src="https://aitop100app-1251510006.cos.ap-shanghai.myqcloud.com/article/undefined/8ff99111-98a5-4269-ac25-0ffa77fafb5d.png?imageMogr2/format/webp/thumbnail/560x/rquality/80">
+      <h4>即梦AI：想象力挑战赛第27期·用胶片还原梦境</h4>
+      <p>2024/11/27 00:00~12/15 23:59</p>
+      <ul class="kk">
+        <li>进行中</li>
+      </ul>
+      <ul class="xx">
+        <li>AI视频创作</li>
+        <li>AI创作大赛</li>
+      </ul>
+    </div>
+
+    <div>
+      <img src="https://aitop100app-1251510006.cos.ap-shanghai.myqcloud.com/article/undefined/afc89a1d-1f35-401b-8b30-5d5accff42dc.png?imageMogr2/format/webp/thumbnail/560x/rquality/80">
+      <h4>“我AI北京”首届城市形象AI创作征集大赛</h4>
+      <p>2024/11/25 00:00~12/31 23:59</p>
+      <ul class="kk">
+        <li>进行中</li>
+      </ul>
+      <ul class="xx">
+        <li>AI绘画</li>
+        <li>AI创作大赛</li>
+        <li>AI视频创作</li>
+      </ul>
+    </div>
+
+    <div>
+      <img src="https://aitop100app-1251510006.cos.ap-shanghai.myqcloud.com/article/undefined/5f225a53-895b-4aff-877c-a0666aa3ed12.png?imageMogr2/format/webp/thumbnail/560x/rquality/80">
+      <h4>即梦AI：想象力挑战赛第26期·绘本主角是小猫</h4>
+      <p>2024/11/25 00:00~12/15 23:59</p>
+      <ul class="kk">
+        <li>进行中</li>
+      </ul>
+      <ul class="xx">
+        <li>AI创作大赛</li>
+        <li>AI视频创作</li>
+      </ul>
+    </div>
+
+    <div>
+      <img src="https://aitop100app-1251510006.cos.ap-shanghai.myqcloud.com/article/undefined/6993096b-9a2c-4809-855d-7cd6c4308b2c.png?imageMogr2/format/webp/thumbnail/560x/rquality/80">
+      <h4>2024中国一东盟大学生AI应用创新邀请赛</h4>
+      <p>2024/11/29 00:00~12/23 23:59</p>
+      <ul class="kk">
+        <li>进行中</li>
+      </ul>
+      <ul class="xx">
+        <li>AI应用</li>
+        <li>现金奖</li>
+      </ul>
+    </div>
+
+    <div>
+      <img src="https://aitop100app-1251510006.cos.ap-shanghai.myqcloud.com/article/undefined/170b86eb-b092-4816-9133-bc7432f559c9.png?imageMogr2/format/webp/thumbnail/560x/rquality/80">
+      <h4>第五届全国人工智能大赛：AI+图像编码赛道</h4>
+      <p>2024/12/02 00:00~2025/02/28 23:59</p>
+      <ul class="kk">
+        <li>进行中</li>
+      </ul>
+      <ul class="xx">
+        <li>AI技术</li>
+        <li>现金奖</li>
+        <li>AI算法大赛</li>
+      </ul>
+    </div>
+
+    <div>
+      <img src="https://aitop100app-1251510006.cos.ap-shanghai.myqcloud.com/article/undefined/f45d860a-5403-4650-9800-eb2f57233517.png?imageMogr2/format/webp/thumbnail/560x/rquality/80">
+      <h4>第五届全国人工智能大赛：AI+增强视频质量评价赛道</h4>
+      <p>2024/12/02 00:00~2025/03/05 23:59</p>
+      <ul class="kk">
+        <li>进行中</li>
+      </ul>
+      <ul class="xx">
+        <li>AI技术</li>
+        <li>AI应用</li>
+        <li>现金奖</li>
+      </ul>
+    </div>
+
+    <div>
+      <img src="https://aitop100app-1251510006.cos.ap-shanghai.myqcloud.com/article/undefined/24f3cb6a-c611-4a70-82b9-d832b5c92a68.png?imageMogr2/format/webp/thumbnail/560x/rquality/80">
+      <h4>第五届全国人工智能大赛：AI+数智人能力及客服应用专项赛</h4>
+      <p>2024/12/02 00:00~2025/03/28 23:59</p>
+      <ul class="kk">
+        <li>进行中</li>
+      </ul>
+      <ul class="xx">
+        <li>AI大模型</li>
+        <li>AI技术</li>
+        <li>AI应用</li>
+      </ul>
+    </div>
+
+    <div>
+      <img src="https://aitop100app-1251510006.cos.ap-shanghai.myqcloud.com/article/undefined/869eafab-5b74-4406-b234-8af798f872ad.png?imageMogr2/format/webp/thumbnail/560x/rquality/80">
+      <h4>“新华杯”新媒体创意大赛-“AI你·武进”创意设计征集活动</h4>
+      <p>2025/03/01 00:00~03/31 00:00</p>
+      <ul class="kk">
+        <li>进行中</li>
+      </ul>
+      <ul class="xx">
+        <li>AI绘画</li>
+        <li>AI创作大赛</li>
+        <li>AI视频创作</li>
+      </ul>
+    </div>
+
+    <div>
+      <img src="https://aitop100app-1251510006.cos.ap-shanghai.myqcloud.com/article/undefined/39a0248d-b31f-4b03-bf3b-12a394f1cdc0.png?imageMogr2/format/webp/thumbnail/560x/rquality/80">
+      <h4>【可灵AI】百变试衣间·创意挑战赛</h4>
+      <p>2024/11/28 00:00~12/12 23:59</p>
+      <ul class="kk">
+        <li>进行中</li>
+      </ul>
+      <ul class="xx">
+        <li>AI绘画</li>
+        <li>AI创作大赛</li>
+      </ul>
+    </div>
+
+    <div>
+      <img src="https://aitop100app-1251510006.cos.ap-shanghai.myqcloud.com/article/undefined/1dca3d2b-e312-4c51-a950-71abb485d708.png?imageMogr2/format/webp/thumbnail/560x/rquality/80">
+      <h4>广东省AI科普+创意与应用大赛</h4>
+      <p>2024/11/26 00:00~12/25 23:59</p>
+      <ul class="kk">
+        <li>进行中</li>
+      </ul>
+      <ul class="xx">
+        <li>AI绘画</li>
+        <li>AI创作大赛</li>
+        <li>AI视频创作</li>
+      </ul>
+    </div>
+
+    <div>
+      <img src="https://aitop100app-1251510006.cos.ap-shanghai.myqcloud.com/article/undefined/13978704-d7f6-41f3-8542-b0de8eb53dd7.png?imageMogr2/format/webp/thumbnail/560x/rquality/80">
+      <h4>孙大圣旅游网：AI短视频营销大赛</h4>
+      <p>2024/11/14 00:00~12/10 00:00</p>
+      <ul class="kk">
+        <li>进行中</li>
+      </ul>
+      <ul class="xx">
+        <li>AI创作大赛</li>
+        <li>AI视频创作</li>
+      </ul>
+    </div>
+
+    <div>
+      <img src="https://aitop100app-1251510006.cos.ap-shanghai.myqcloud.com/article/undefined/2b0d2fd5-c613-4514-82e3-18bbe00f2e04.png?imageMogr2/format/webp/thumbnail/560x/rquality/80">
+      <h4>第三届中国生成式AI应用创新挑战赛</h4>
+      <p>2024/11/23 00:00~12/07 23:59</p>
+      <ul class="ff">
+        <li>已结束</li>
+      </ul>
+      <ul class="xx">
+        <li>现金奖</li>
+        <li>AI应用</li>
+      </ul>
+    </div>
+
+    <div>
+      <img src="https://aitop100app-1251510006.cos.ap-shanghai.myqcloud.com/article/undefined/0fe57ada-ac3b-4680-81b1-27544a8a4094.png?imageMogr2/format/webp/thumbnail/560x/rquality/80">
+      <h4>北京亦庄：2024视听AI创作大赛</h4>
+      <p>2024/11/06 00:00~11/24 23:59</p>
+      <ul class="ff">
+        <li>已结束</li>
+      </ul>
+      <ul class="xx">
+        <li>现金奖</li>
+        <li>AI创作大赛</li>
+        <li>AI视频创作</li>
+      </ul>
+    </div>
+
+    <div>
+      <img src="https://aitop100app-1251510006.cos.ap-shanghai.myqcloud.com/article/undefined/5be533ad-a57b-46ec-9bc1-4f020f709d70.png?imageMogr2/format/webp/thumbnail/560x/rquality/80">
+      <h4>“智信杯”全国高校AI素养短视频大赛</h4>
+      <p>2024/11/15 00:00~12/15 23:59</p>
+      <ul class="kk">
+        <li>进行中</li>
+      </ul>
+      <ul class="xx">
+        <li>AI创作大赛</li>
+        <li>AI视频创作</li>
+      </ul>
+    </div>
+  </div>
+  
+  <!-- 返回顶部按钮 -->
+  <button class="back-to-top" onclick="scrollToTop()" style="display: none;">Top</button>
+
+  <div class="gg" id="azaz">
+    查看更多
+  </div>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <p>版权所有 &copy; AI TOP100</p>
+  </footer>
+</body>
+</html>

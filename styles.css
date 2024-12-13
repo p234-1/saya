@@ -458,6 +458,7 @@ button:hover {
   /* 已结束 */
   .ff {
     position: absolute; 
+    bottom: 160px;
     right: 0; 
     width: 80px; 
     height: 45px; 
